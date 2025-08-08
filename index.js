@@ -236,17 +236,18 @@ buyNowELm.addEventListener("click", () => {
 const productDetailsELm = document.querySelector(".product-details");
 const productDetails = async () => {
   const id = window.location.search.split("=")[1];
-  const res = await fetch(`${apiData}/${id}`);
+  const res = await fetch(apiData);
   const data = await res.json();
+  const filteredData = data.find((curProduct) => curProduct.id == id);
 
   productDetailsELm.innerHTML = `
   <div class="product-box">
                 <div class="img-box">
-                    <img src="${data.image}" alt="${data.name}">
+                    <img src="${filteredData.image}" alt="${filteredData.name}">
                 </div>
-                <h2 class="product-name">${data.name}</h2>
+                <h2 class="product-name">${filteredData.name}</h2>
                 <div class="price-and-cart">
-                    <span class="price">${data.price}</span>
+                    <span class="price">${filteredData.price}</span>
                     <button class="add-cart">Add to cart</button>
                 </div>
             </div>
