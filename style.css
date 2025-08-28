@@ -222,3 +222,19 @@ ul.filter-list li {
 .pClas.active{
     display: flex;
 }
+
+.inputElm{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.inputElm input{
+    padding: 5px 10px;
+    font-size: 1vw;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    width:30%;
+    margin-right: 0px;
+}
