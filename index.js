@@ -4,8 +4,10 @@ const cartIconElm = document.querySelector(".cart-icon");
 const cartCloseElm = document.querySelector(".cart-close");
 const porductContentElm = document.querySelector(".product-content");
 const filterListElm = document.querySelector(".filter-list");
+const searchInputElm = document.querySelector(".search__input");
 let allCategory = [];
 let allFilteredCategory = [];
+let productData = [];
 
 cartIconElm.addEventListener("click", () => {
   cartElm.classList.add("active");
@@ -89,6 +91,7 @@ const handleFilter = () => {
 
 //============================= Fetching Api Data ==============================
 const fetchData = async () => {
+  porductContentElm.innerHTML = "Loading....";
   const response = await fetch(apiData);
   const data = await response.json();
 
@@ -97,6 +100,7 @@ const fetchData = async () => {
   });
   mobileData(mobileFiltered);
   showData(data);
+  productData = data;
 };
 
 fetchData();
@@ -257,3 +261,18 @@ const productDetails = async () => {
 
 productDetails();
 // ============================== End Product Details ==============================
+
+searchInputElm.addEventListener("input", (e) => {
+  const value = e.target.value.toLowerCase();
+  console.log(value);
+  const filteredData = productData.filter((item) =>
+    item.name.toLowerCase().includes(value)
+  );
+  showData(filteredData);
+
+  if (value === "") {
+    fetchData();
+  } else if (filteredData.length === 0) {
+    porductContentElm.innerHTML = "No Product Found";
+  }
+});
