@@ -253,21 +253,55 @@ const productDetails = async () => {
                 <h2 class="product-name">${filteredData.name} <span>(${
     filteredData.company
   })</span></h2>
-  <div class="product-rating">Rating: <span class="rating">&#9733;</span>
-  <span class="rating">&#9733;</span>
-  <span class="rating">&#9733;</span>
-  <span class="rating">&#9733;</span>
-  <span class="rating">&#9733;</span><span class="rating-value"></span></div>
-  <p class="product-description">${filteredData.description}</p>
+                  <div class="product-rating">Rating: <span class="rating">&#9733;</span>
+                  <span class="rating">&#9733;</span>
+                  <span class="rating">&#9733;</span>
+                  <span class="rating">&#9733;</span>
+                  <span class="rating">&#9733;</span><span class="rating-value"></span></div>
+                  <p class="product-description">${filteredData.description}</p>
                 <div class="price-and-cart">
                     <span class="price">${filteredData.price / 100}</span>
+                </div>
+                <div class="reviews">
+                    <h3>Reviews</h3>
+                    <div class="review-box">
+                        <form class="review-form">
+                          <input type="text" class="review-input" placeholder="Your Name" required />
+                        </form>
+                        <div class="review-text"></div>
+                    </div>
                 </div>
                 </div>
             </div>
   `;
   showAddToCartButton();
   starRating();
+  reviews();
 };
+
+// ============================== Reviews ==============================
+const reviews = () => {
+  const reviewForm = document.querySelector(".review-form");
+  const reviewInput = document.querySelector(".review-input");
+  const reviewText = document.querySelector(".review-text");
+
+  reviewForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const name = reviewInput.value;
+    if (name.value === "") {
+      alert("Please enter your name");
+      return;
+    } else {
+      const newReview = document.createElement("p");
+      newReview.classList.add("single-review");
+      newReview.innerText = `${name} - ${rating}/5`;
+      reviewText.appendChild(newReview);
+      reviewInput.value = "";
+      handleStarRating(document.querySelectorAll(".rating"));
+    }
+  });
+};
+// ============================== Reviews ==============================
 
 // ============================== Star Rating ==============================
 let rating = 0;
@@ -290,7 +324,7 @@ const handleStarRating = (starRatingElm) => {
     }
   });
   const ratingValueElm = document.querySelector(".rating-value");
-  ratingValueElm.innerText = `(${rating} / 5)`;
+  ratingValueElm.innerText = `(${rating}/5)`;
 };
 // ============================== End Star Rating ==============================
 
