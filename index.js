@@ -245,19 +245,54 @@ const productDetails = async () => {
   const filteredData = data.find((curProduct) => curProduct.id == id);
 
   productDetailsELm.innerHTML = `
-  <div class="product-box">
-                <div class="img-box">
+  <div class="product-box details-box">
+                <div class="img-box details-img">
                     <img src="${filteredData.image}" alt="${filteredData.name}">
                 </div>
-                <h2 class="product-name">${filteredData.name}</h2>
+                <div class="product-info">
+                <h2 class="product-name">${filteredData.name} <span>(${
+    filteredData.company
+  })</span></h2>
+  <div class="product-rating">Rating: <span class="rating">&#9733;</span>
+  <span class="rating">&#9733;</span>
+  <span class="rating">&#9733;</span>
+  <span class="rating">&#9733;</span>
+  <span class="rating">&#9733;</span><span class="rating-value"></span></div>
+  <p class="product-description">${filteredData.description}</p>
                 <div class="price-and-cart">
-                    <span class="price">${filteredData.price}</span>
-                    <button class="add-cart">Add to cart</button>
+                    <span class="price">${filteredData.price / 100}</span>
+                </div>
                 </div>
             </div>
   `;
   showAddToCartButton();
+  starRating();
 };
+
+// ============================== Star Rating ==============================
+let rating = 0;
+const starRating = () => {
+  const starRatingElm = document.querySelectorAll(".rating");
+  starRatingElm.forEach((curStar, index) => {
+    curStar.addEventListener("click", () => {
+      rating = index + 1;
+      handleStarRating(starRatingElm);
+    });
+  });
+};
+
+const handleStarRating = (starRatingElm) => {
+  starRatingElm.forEach((curStar, index) => {
+    if (index < rating) {
+      curStar.classList.add("active");
+    } else {
+      curStar.classList.remove("active");
+    }
+  });
+  const ratingValueElm = document.querySelector(".rating-value");
+  ratingValueElm.innerText = `(${rating} / 5)`;
+};
+// ============================== End Star Rating ==============================
 
 productDetails();
 // ============================== End Product Details ==============================
