@@ -180,7 +180,7 @@ ul.filter-list li {
 
 .product-content{
     display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, auto));
+    grid-template-columns: repeat(auto-fill, minmax(250px, auto));
     gap: 20px;
     margin-bottom: 20px;
 }
@@ -237,4 +237,44 @@ ul.filter-list li {
     outline: none;
     width:30%;
     margin-right: 0px;
+}
+
+.details-box{
+    display: flex;
+    gap: 20px;
+}
+
+.details-box .product-name span{
+    font-size: 1.2vw;
+    color: #777;
+    margin-left: 10px;
+    text-transform: capitalize;
+    font-weight: 400;
+    color:hotpink
+}
+
+.details-img{
+    width:30%;
+}
+
+.product-info{
+    width:70%;
+}
+
+.product-rating{
+    margin: 10px 0;
+}
+.product-rating .rating{
+    cursor: pointer;
+    margin-right: 5px;
+    font-size: 1.5vw;
+}
+.active{
+    color: hotpink;
+}
+.rating-value{
+    font-size: 1.2vw;
+    margin-left: 10px;
+    color: #333;
+    font-weight: 500;
 }
