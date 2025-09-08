@@ -238,6 +238,7 @@ buyNowELm.addEventListener("click", () => {
 
 // ============================== Product Details ==============================
 const productDetailsELm = document.querySelector(".product-details");
+let arr = new Array(5).fill(0);
 const productDetails = async () => {
   const id = window.location.search.split("=")[1];
   const res = await fetch(apiData);
@@ -253,11 +254,16 @@ const productDetails = async () => {
                 <h2 class="product-name">${filteredData.name} <span>(${
     filteredData.company
   })</span></h2>
-                  <div class="product-rating">Rating: <span class="rating">&#9733;</span>
-                  <span class="rating">&#9733;</span>
-                  <span class="rating">&#9733;</span>
-                  <span class="rating">&#9733;</span>
-                  <span class="rating">&#9733;</span><span class="rating-value"></span></div>
+                  <div class="product-rating">Rating:
+
+                  ${arr
+                    .map(() => {
+                      return `<span class="rating">&#9733;</span>`;
+                    })
+                    .join("")}
+                  
+                  
+                  <span class="rating-value"></span></div>
                   <p class="product-description">${filteredData.description}</p>
                 <div class="price-and-cart">
                     <span class="price">${filteredData.price / 100}</span>
